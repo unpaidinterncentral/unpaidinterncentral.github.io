@@ -1,0 +1,20 @@
+{
+    "name": "UIC",
+    "short_name": "UIC",
+    "icons": [
+        {
+            "src": "https://unpaidinterncentral.github.io/globassets/android-chrome-192x192.png?v=3",
+            "sizes": "192x192",
+            "type": "image/png"
+        },
+        {
+            "src": "https://unpaidinterncentral.github.io/globassets/android-chrome-512x512.png?v=3",
+            "sizes": "512x512",
+            "type": "image/png"
+        }
+    ],
+    "theme_color": "#202225",
+    "background_color": "#202225",
+    "start_url": "https://unpaidinterncentral.github.io",
+    "display": "standalone"
+}
