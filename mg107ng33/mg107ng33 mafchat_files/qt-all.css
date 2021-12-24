@@ -1,0 +1,480 @@
+
+html, body {
+font-family: Arial, Helvitica, sans-serif;
+margin: 0;
+padding: 0;
+height: 100%;
+}
+
+p {
+font-family: Arial, Helvitica, sans-serif;
+}
+
+span {
+font-family: Arial, Helvitica, sans-serif;
+}
+
+a,
+a:visited {
+  color: #054F89;
+}
+
+a:hover {
+  color: #000000;
+}
+
+/* Prevent borders on image links */
+img {
+    border:none;
+}
+
+.messagecell img {
+    image-orientation: from-image;
+}
+
+#lightbox-image {
+    image-orientation: from-image;
+}
+
+.invisible {
+    display:none;
+    visibility:hidden;
+}
+
+#div-page-top,
+#div-page-top-custom {
+  min-height: 100%;
+  position: relative;
+}
+
+#div-page-top,
+#div-page-top-content-custom {
+    margin-left:10%;
+    margin-right:10%;
+}
+
+* html #div-page-top
+{
+   height: 100%;
+}
+
+
+#div-page-top-content {
+    /* Must be footer's height */
+    padding-bottom: 226px;
+}
+
+#div-page-top-content-custom {
+    padding-top:0.8em;
+    /* Must be footer's height */
+    padding-bottom: 1.5em;
+}
+
+.div-qt-shutdown-heading {
+    background-color: #ffff66;
+    color: #222222;
+    font-weight:bold;
+    padding:0.5em;
+    padding-top:0.8em;
+    margin-top:0.3em;
+    margin-bottom:0.5em;
+}
+
+#div-page-bottom {
+background-color:#e3e4e5;
+margin-top:-226px;
+position: relative;
+width: 100%;
+height: 226px;
+}
+
+#div-page-bottom-custom {
+margin-top:-1.5em; /* must be negative of height */
+margin-right:0px;
+margin-left:0px;
+padding-left:0px;
+padding-right:0px;
+background-color: #EBEBEB;
+position: relative;
+width: 100%;
+height: 1.5em; /* div-page-top-custom height must match */
+}
+
+/* Adjust the custom banner table so that it doesn't stick way out on Windows FF/some versions of Chrome. */
+#div-page-top-custom table:first-child {
+	display: inline-block;
+	min-width: 699px;
+}
+
+#div-header {
+padding-bottom: 12px;
+margin-bottom:15px;
+}
+
+#div-top-bar {
+    line-height: 0px;
+    height: 8px;
+    background-color: #3b67ab;
+    margin-bottom: 14px;
+}
+
+#img-logoline-dots {
+ max-width:517px;width: 100%; height:11px; vertical-align:bottom
+}
+
+#td-logoline-dots {
+width:100%;
+background: url("/logoline_dot.png") repeat-x 47px;
+}
+
+#img-site-logoline-dots {
+ max-width:517px;width: 100%; height:37px; vertical-align:bottom
+}
+
+#td-site-logoline-dots {
+width:100%;
+background: url("/site_logoline_dot.png") repeat-x 37px;
+}
+
+#div-navcontainer
+{
+margin-top:15px;
+border: 1px solid #e2e3e4;
+background: url("/navbar_bg.png") repeat-x 47px;
+min-width: 690px;
+height: 43px;
+}
+
+#div-nav-shadow
+{
+line-height:0px;
+padding-top:0px;
+min-width: 690px;
+}
+
+#table-site-navcontainer
+{
+background: url("/site_navbar_bg.png") repeat-x 32px;
+}
+
+.navlist-item
+{
+/*background: url("/navbar_bg.png") repeat-x 47px;*/
+font: 10pt "Microsoft Sans Serif", "Lucida Grande", sans-serif;
+padding: 13px 15px 0;
+height: 30px;
+float: left;
+}
+
+.site-navlist-item
+{
+background: url("/site_navbar_bg.png") repeat-x 32px;
+font: 10pt "Microsoft Sans Serif", "Lucida Grande", sans-serif;
+text-align: center;
+vertical-align: middle;
+padding-left:15px;
+padding-right:15px;
+padding-top:0px;
+padding-bottom:0px;
+height:28px;
+}
+
+a.navbutton
+{
+color: #404a4e;
+text-decoration: none;
+font-weight: bold;
+text-shadow: 0px 1px 1px #ffffff;
+}
+
+.navbutton#navbutton-signin {
+float: right;
+}
+
+body#about .navbutton#navbutton-about,
+body#buzz .navbutton#navbutton-buzz,
+body#examples .navbutton#navbutton-examples,
+body#faq .navbutton#navbutton-faq
+{ 
+background: url("/navbar_bg_sel.png") repeat-x 47px;
+border-left: 1px solid #999999;
+border-right: 1px solid #eeeeee;
+padding-left:14px;
+padding-right:14px;
+}
+
+.navbutton#navbutton-news
+{
+    color:#054f89;
+}
+
+.navbutton:hover 
+{ 
+background: url("/navbar_bg_sel.png") repeat-x 47px;
+border-left: 1px solid #999999;
+border-right: 1px solid #eeeeee;
+padding-left:14px;
+padding-right:14px;
+}
+
+#div-bottom-blue-bar {
+height:3px;
+background-color:#2c67b1;
+margin-left:10%;
+margin-right:10%;
+/*min-width: 678px;*/
+min-width: 540px;
+}
+
+#div-bottom-bar-custom {
+height:3px;
+margin-left:10%;
+margin-right:10%;
+}
+
+#div-footer {
+border-top: 1px solid #FFFFFF;
+background-color: #F0F0F0;
+margin-left:10%;
+margin-right:10%;
+padding-top:24px;
+padding-left: 17px;
+padding-right: 17px;
+padding-bottom: 48px;
+font-size: 0.8em;
+color: #808080;
+height:150px;
+/*min-width: 644px;*/
+min-width: 506px;
+}
+
+#div-footer-custom {
+padding: 0 10%;
+font-size: 0.8em;
+color: #808080;
+}
+
+#div-footer-logo {
+float: left;
+display:inline-block;
+vertical-align:top;
+margin-top:3px;
+}
+
+/* obsolete - removed logo from custom footer */
+#div-footer-logo-custom {
+float: left;
+display:inline-block;
+vertical-align:top;
+margin-top:3px;
+}
+
+#div-footer-text {
+float:left;
+display:inline-block;
+vertical-align:top;
+margin-top:3px;
+margin-left:1em;
+font-size:0.85em;
+line-height:1.45em;
+}
+
+#div-footer-text span {
+font-family: Tahoma, Helvetica, sans-serif;
+}
+
+
+.div-footer-links a
+{
+text-decoration:none;
+font-weight:bold;
+color: #054f89;
+}
+
+.div-footer-links a:hover
+{
+color: #000000;
+}
+
+#div-page-title h2
+{
+    margin: 0;
+}
+
+#div-page-title hr
+{
+    border: 0;
+    height:1px;
+}
+
+.div-genericform
+{
+    color: #404a4e;
+    /*padding:10px;*/
+}
+
+.div-form-label
+{
+    padding-top:15px;
+}
+
+.table-genericform
+{
+    border-collapse: collapse;
+    width:100%;
+}
+
+.p-content
+{
+    color: #404a4e;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height:1.5em;
+    font-size:0.86em;
+    margin-top: 0.5em;
+}
+
+.li-content
+{
+    color: #404a4e;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height:1.5em;
+    font-size:0.86em;
+    margin-top: 0.5em;
+}
+
+/* prevent further text shrinkage for nested li's */
+.li-content .li-content
+{
+    font-size:1em;
+}
+
+
+.h-content
+{
+	font-family: Arial, Helvitica, sans-serif;
+	color: #054f89;
+	margin: 0;
+}
+
+.hr-content
+{
+    color: #404a4e;
+    background-color:  #404a4e;
+    border: 0;
+    height:1px;
+}
+
+.span-error
+{
+    color: #aa0000;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+/* Common FAQ-like styles */
+
+#faq-content-cell
+{
+	width: 60%;
+}
+
+#faq-content-cell h3, #faq-content-cell p, #faq-content-cell ol
+{
+	color: #404a4e;
+}
+
+
+#faq-content-cell a
+{
+	color: #65812c;
+}
+
+#faq-nav-cell
+{
+	vertical-align: top;
+	padding-left: 80px;
+}
+
+#faq-nav-cell h3
+{
+	font-size: 0.90em;
+}
+
+#faq-content-cell hr
+{
+	margin: 25px 0;
+}
+
+#faq-content-cell h2
+{
+	margin: 0 0 20px 0;
+}
+
+#faq-admin-content-container
+{
+	margin-bottom: 35px;
+}
+
+#faq-admin-links-container
+{
+	margin-bottom: 35px;
+}
+
+#faq-nav-cell a
+{
+    display: block;
+    font-size: 0.71em;
+    color: #93999c;
+    font-family: Arial, Helvetica, sans-serif;
+    line-height:1.5em;
+    margin: 0.9em 0;
+    text-decoration: none;
+    font-weight: bold;
+}
+
+/* Re-defined styles to replace some CSS generated by perswiz. */
+
+.admin-messagerow1
+{
+	background-color: #f0f0f1;
+}
+
+.admin-messagerow2
+{
+	background-color: #e9f0f7;
+}
+
+.genericformborder
+{
+	background-color: #cccccc;
+}
+
+/* XXX TODO: this is obsolete and should not be used in the new design */
+.genericformhead
+{
+	background-color: #697b9f;
+	color: #ffffff;
+}
+
+/* Used for topic heading and headings on customizable forms */
+/* customizable */
+.heading-text-color
+{
+    color: #054F89;
+}
+/* customizable */
+.heading-rule-color
+{
+    color: #054F89;
+    background-color: #054F89;
+}
+
+.warning
+{
+    color: #cc0000;
+    font-weight:bold;
+    background-color: #ffffff;
+}
+
+.centered {
+  text-align: center;
+}
