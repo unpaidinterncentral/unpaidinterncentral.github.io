@@ -1,0 +1,422 @@
+@media screen and (max-width: 600px) {
+
+h2 {
+    font-size: 1em;
+}
+
+hr {
+    margin-top:0.1em;
+    margin-bottom:0.1em;
+}
+
+/* From qt-all.css */
+#div-page-top,
+#div-page-top-content-custom {
+    margin-left:1%;
+    margin-right:1%;
+}
+
+#div-page-top-content {
+    /* Must be footer's height */
+    padding-bottom: 5em;
+}
+
+#div-page-title {
+    margin-top: 0.1em;
+}
+
+#div-page-bottom {
+    margin-top:-5em;
+    height: 5em;
+}
+
+
+#div-top-bar {
+    height:2px;
+}
+
+#img-tagline-with-dots {
+    display:none;
+}
+
+#div-bottom-blue-bar {
+    height:3px;
+}
+
+#div-bottom-bar-custom {
+    height:3px;
+    margin-left:1%;
+    margin-right:1%;
+}
+
+#div-footer {
+    margin-left:0;
+    margin-right:0;
+    padding-top:0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    padding-bottom: 0px;
+    height:auto;
+    min-width:0px;
+}
+
+#div-bottom-blue-bar {
+    height:1px;
+    margin-left:0;
+    margin-right:0;
+    min-width: 0px;
+}
+
+#div-footer-logo,
+#div-footer-logo-custom {
+    display:none;
+}
+
+#div-footer-custom {
+    padding: 0
+}
+
+/* From qt-topics.css */
+.topic-navcontainer
+{
+    margin-top: 0.5em;
+    border: none;
+    background-color: #ffffff;
+    background-image: none;
+    height: 2em;
+    line-height: 1em;
+    float: none;
+}
+
+.topic-navbutton
+{
+    display: inline;
+    text-decoration: underline;
+    padding-right: 0.1em;
+    float: none;
+}
+
+a.topic-navbutton:hover,
+.topic-navbutton-active
+{
+    background-image: none;
+    border-left: none;
+    border-right: none;
+}
+
+#topic-a-minilogo-navbutton-custom
+{
+    display:inline;
+    float:none;
+}
+
+#topic-navcontainer-icon-custom
+{
+    float: none;
+    display: inline;
+    margin: 0;
+    vertical-align:middle;
+}
+
+#topic-navcontainer-custom
+{
+    padding-top: 0;
+    padding-left: 0px;
+    height: 2em;
+    line-height: 1em;
+}
+
+.topic-navbutton-custom
+{
+    float: none;
+    display: inline;
+    text-decoration: underline;
+    padding-right: 0.1em;
+}
+
+.topic-navbutton-handheld-hide
+{
+    display:none !important;
+}
+
+.topic-userbar
+{
+    display:none;
+}
+
+.topic-navicon
+{
+    display:none;
+}
+
+#topic-nav-shadow
+{
+    display:none;
+}
+
+#topic-navuserinfo
+{
+    display: inline;
+    margin-right: 0px;
+}
+
+#topic-navuserinfo-custom
+{
+    float: right;
+    display: inline;
+    margin-right: 0.5em;
+    margin-left: 2em;
+}
+
+#mytopics-header-table
+{
+    border-collapse: collapse;
+    margin-bottom: 0;
+}
+
+#topicheader
+{
+    display:none;
+}
+
+.topic-useraction
+{
+    text-decoration:underline;
+}
+
+.topic-useraction-custom
+{
+    text-decoration:underline;
+}
+
+#div-topic-name-row
+{
+    margin-bottom: 0.5em;
+}
+
+/* customizable */
+.topicname
+{
+    font-size: 1em;
+}
+
+#p-topicname
+{
+    float: none;
+}
+
+#topichr
+{
+    clear: both;
+    height: 1px;
+}
+
+#topic-intro-div
+{
+    margin-bottom:0;
+}
+
+.topic-messageauthorcontainer
+{
+    border-top-width: 2px;
+    padding-left: 0.1em;
+    padding-top: 0.1em;
+    padding-bottom: 0.1em;
+}
+
+.topic-messageauthorcontainer-deleted
+{
+    border-top-width: 2px;
+    border-bottom-width: 1px;
+    padding-left: 0.5em;
+    padding-top: 0em;
+    padding-bottom: 0em;
+}
+
+.topic-messagebody
+{
+    border-top-width: 2px;
+    border-right-width: 1px;
+    border-left-width: 2px;
+    border-bottom-width: 1px;
+    padding: 0.1em;
+}
+
+.topic-messagebody-deleted
+{
+    border-top-width: 2px;
+    border-left-width: 2px;
+    padding: 0;
+}
+
+
+.topic-messagenumberpos
+{
+    margin-right:0.1em;
+}
+
+#topic-messagestats-container {
+    display:none;
+}
+
+
+/****************************/
+/****** RIGHT-SIDE BAR ******/
+/****************************/
+
+#topic-rightbarcontainer
+{
+    display:none;
+}
+
+/* post-message */
+.div-post-hints {
+    display:none;
+}
+
+.div-post-username {
+    display:none;
+}
+
+.div-recentmessages-note {
+    display:none;
+}
+
+body
+{
+    min-width: 200px;
+}
+
+/* intro page */
+#img-screen-shot-left,
+#img-screen-shot-middle,
+#img-screen-shot-right,
+#navbutton-home,
+#navbutton-span-quicktopic, /* About QuickTopic => About */
+#navbutton-news,
+#navbutton-search-container
+{
+    display:none;
+}
+
+#div-navcontainer
+{
+    height:2em;
+    min-width: 0;
+}
+
+.navlist-item
+{
+    padding-top:0.6em;
+    padding-right:0.5em;
+    padding-left:0.5em;
+}
+.navbutton:hover { 
+    background: none;
+    border-left: none;
+    border-right: none;
+    padding-left:0.5em;
+    padding-right:0.5em;
+}
+
+body#about .navbutton#navbutton-about,
+body#buzz .navbutton#navbutton-buzz,
+body#examples .navbutton#navbutton-examples,
+body#faq .navbutton#navbutton-faq
+{
+    height:1.9em;
+    background: none;
+    background-color: #ffffff;
+    border-left: 1px solid #999999;
+    border-right: 1px solid #eeeeee;
+    padding-left:0.5em;
+    padding-right:0.5em;
+}
+
+#div-intro-info-container 
+{
+    min-width: 0;
+}
+
+.p-intro-body
+{
+    line-height:1.2em;
+    font-weight:normal;
+}
+
+#p-intro-mobile-friendly
+{
+    display:block;
+}
+
+#div-intro-page-bottom
+{
+    background-color:#e3e4e5;
+    width: 100%;
+    min-width: 0;
+}
+
+/* Learn more about Pro button */
+#div-bottom-left {
+    margin-bottom:10px;
+}
+
+#div-intro-left
+{
+    /* Right padding matches div-intro-right's total width */
+    padding: 0 0 10px 0;
+}
+
+#div-details 
+{
+    display:none;
+    position:relative;
+    right:auto;
+    bottom:auto;
+    width: auto;
+}
+
+#div-intro-page-top
+{
+    margin-left:2%;
+    margin-right:2%;
+}
+
+#div-intro-page-bottom
+{
+    margin-left:0;
+    margin-right:0;
+}
+
+#div-intro-bottom-container {
+    margin-left:2%;
+    margin-top:10px;
+    margin-bottom:10px;
+    margin-right:2%;
+}
+
+#p-intro-headline
+{
+    font-size:1.2em;
+}
+
+#ui-dialog-title-new-topic-form,
+#div-new-topic-form
+{
+    font-size:0.6em;
+}
+
+/* mytopics */
+.col-mytopics-creator,
+.col-mytopics-message-count,
+.col-mytopics-spacer,
+.col-mytopics-shared
+{
+    display:none;
+}
+
+#span-mytopics-go-shared
+{
+    font-size:0.8em;
+}
+}

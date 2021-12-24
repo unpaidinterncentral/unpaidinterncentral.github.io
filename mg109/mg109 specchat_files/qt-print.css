@@ -1,0 +1,55 @@
+body * {
+  background-color: white !important;
+}
+
+.topic-navcontainer,
+#topic-navcontainer-custom,
+#div-topic-postbutton,
+.messagedata-ip img,
+#topic-messagestats-container,
+.topic-messagecontrolsfloat,
+#topic-nav-shadow {
+  display: none;
+}
+
+#topic-allmessagestable td {
+  border: 1px solid black;
+}
+
+/* Force a reset standard footer so it looks more like customized topic footer, and prevents screwy paging. */
+#div-page-top {
+  min-height: 0 !important;
+}
+
+#div-page-top-content {
+  padding-bottom: 0 !important;
+}
+
+#div-page-bottom {
+  background-color: transparent;
+  height: auto !important;
+  margin-top: 0 !important;
+}
+
+#div-footer {
+  background-color: transparent;
+  border-top: 0px none;
+  height: auto !important;
+  margin-left: 0;
+  margin-right: 0;
+  padding: 0 60px;
+}
+
+.heading-text-color,
+.heading-rule-color,
+.introcell,
+.messagecell,
+.messagedata,
+.messageauthor,
+.messagecell .message-note,
+.messagenumber,
+.messagerow,
+.messagerow:visited,
+.custom-contrast-container .custom-contrast-color {
+  color: black !important;
+}
