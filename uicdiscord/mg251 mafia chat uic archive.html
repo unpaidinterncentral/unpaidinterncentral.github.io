@@ -1,0 +1,5099 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>lol bob central™ - 251-maf-chat</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+
+    <style>
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-300.woff);
+            font-weight: 300;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-400.woff);
+            font-weight: 400;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-500.woff);
+            font-weight: 500;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-600.woff);
+            font-weight: 600;
+        }
+
+        @font-face {
+            font-family: Whitney;
+            src: url(https://cdn.jsdelivr.net/gh/Tyrrrz/DiscordFonts@master/whitney-700.woff);
+            font-weight: 700;
+        }
+
+        body {
+            background-color: #36393e;
+            color: #dcddde;
+            font-family: "Whitney", "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 17px;
+            font-weight: 400;
+        }
+
+        a {
+            color: #00aff4;
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            object-fit: contain;
+        }
+
+        .markdown {
+            max-width: 100%;
+            line-height: 1.3;
+            overflow-wrap: break-word;
+        }
+
+        .preserve-whitespace {
+            white-space: pre-wrap;
+        }
+
+        .spoiler-text {
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .spoiler-text--hidden {
+            cursor: pointer;
+            background-color: #202225;
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .spoiler-text--hidden:hover {
+            background-color: rgba(32, 34, 37, 0.8);
+        }
+
+        .spoiler-text--hidden::selection {
+            color: rgba(0, 0, 0, 0);
+        }
+
+        .quote {
+            display: flex;
+            margin: 0.05em 0;
+        }
+
+        .quote-border {
+            margin-right: 0.5em;
+            border: 2px solid #4f545c;
+            border-radius: 3px;
+        }
+
+        .pre {
+            background-color: #2f3136;
+            font-family: "Consolas", "Courier New", Courier, monospace;
+        }
+
+        .pre--multiline {
+            margin-top: 0.25em;
+            padding: 0.5em;
+            border: 2px solid #282b30;
+            border-radius: 5px;
+            color: #b9bbbe;
+        }
+
+        .pre--multiline.hljs {
+            background-color: #2f3136;
+            color: #b9bbbe;
+        }
+
+        .pre--inline {
+            padding: 2px;
+            border-radius: 3px;
+            font-size: 0.85em;
+        }
+
+        .mention {
+            border-radius: 3px;
+            padding: 0 2px;
+            color: #dee0fc;
+            background-color: rgba(88, 101, 242, .3);
+            font-weight: 500;
+        }
+
+        .mention:hover {
+            background-color: #5865f2;
+            color: #ffffff
+        }
+
+        .timestamp {
+            border-radius: 3px;
+            padding: 0 2px;
+            background-color: rgba(255, 255, 255, 0.06);
+        }
+
+        .emoji {
+            width: 1.325em;
+            height: 1.325em;
+            margin: 0 0.06em;
+            vertical-align: -0.4em;
+        }
+
+        .emoji--small {
+            width: 1em;
+            height: 1em;
+        }
+
+        .emoji--large {
+            width: 2.8em;
+            height: 2.8em;
+        }
+
+        .preamble {
+            display: grid;
+            margin: 0 0.3em 0.6em 0.3em;
+            max-width: 100%;
+            grid-template-columns: auto 1fr;
+        }
+
+        .preamble__guild-icon-container {
+            grid-column: 1;
+        }
+
+        .preamble__guild-icon {
+            max-width: 88px;
+            max-height: 88px;
+        }
+
+        .preamble__entries-container {
+            grid-column: 2;
+            margin-left: 0.6em;
+        }
+
+        .preamble__entry {
+            font-size: 1.4em;
+            color: #ffffff;
+        }
+
+        .preamble__entry--small {
+            font-size: 1em;
+        }
+
+        .chatlog {
+            max-width: 100%;
+        }
+
+        .chatlog__message-group {
+            display: grid;
+            margin: 0 0.6em;
+            padding: 0.9em 0;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            grid-template-columns: auto 1fr;
+        }
+
+        .chatlog__reference-symbol {
+            grid-column: 1;
+            margin: 8px 4px 4px 18px;
+            border-left: 2px solid #4f545c;
+            border-top: 2px solid #4f545c;
+            border-radius: 8px 0 0 0;
+        }
+
+        .chatlog__reference {
+            display: flex;
+            grid-column: 2;
+            margin-bottom: 0.25em;
+            font-size: 0.875em;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            align-items: center;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-avatar {
+            border-radius: 50%;
+            width: 16px;
+            height: 16px;
+            margin-right: 0.25em;
+        }
+
+        .chatlog__reference-name {
+            margin-right: 0.3em;
+            font-weight: 600;
+        }
+
+        .chatlog__reference-content {
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__reference-content a:hover {
+            text-decoration: none;
+        }
+
+        .chatlog__reference-link {
+            cursor: pointer;
+            color: #b5b6b8;
+        }
+
+        .chatlog__reference-link * {
+            display: inline;
+            pointer-events: none;
+        }
+
+        .chatlog__reference-link:hover {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-link:hover *:not(.spoiler-text) {
+            color: #ffffff;
+        }
+
+        .chatlog__reference-edited-timestamp {
+            margin-left: 0.25em;
+            font-size: 0.8em;
+            unicode-bidi: bidi-override;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__author-avatar-container {
+            grid-column: 1;
+            width: 40px;
+            height: 40px;
+            margin-right: 16px;
+        }
+
+        .chatlog__author-avatar {
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+        }
+
+        .chatlog__messages {
+            grid-column: 2;
+            min-width: 50%;
+            direction: ltr;
+        }
+
+        .chatlog__author-name {
+            font-weight: 500;
+            color: #ffffff;
+        }
+
+        .chatlog__timestamp {
+            margin-left: 0.3em;
+            font-size: 0.75em;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__message {
+            padding: 0.1em 0.3em;
+            margin: 0 -0.3em;
+            background-color: transparent;
+            transition: background-color 1s ease;
+        }
+
+        .chatlog__message--highlighted {
+            background-color: rgba(114, 137, 218, 0.2);
+        }
+
+        .chatlog__message--pinned {
+            background-color: rgba(249, 168, 37, 0.05);
+        }
+
+        .chatlog__content {
+            font-size: 0.95em;
+            word-wrap: break-word;
+        }
+
+        .chatlog__edited-timestamp {
+            margin-left: 0.15em;
+            font-size: 0.8em;
+        }
+
+        .chatlog__attachment {
+            display: inline-block;
+            position: relative;
+            margin-top: 0.3em;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden {
+            cursor: pointer;
+            box-shadow: 0 0 1px 1px rgba(0, 0, 0, 0.1);
+        }
+
+        .chatlog__attachment--hidden * {
+            pointer-events: none;
+        }
+
+        .chatlog__attachment-spoiler-caption {
+            display: none;
+            z-index: 999;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            padding: 0.4em 0.8em;
+            background-color: rgba(0, 0, 0, 0.9);
+            border-radius: 20px;
+            color: #dcddde;
+            font-size: 0.9em;
+            font-weight: 600;
+            letter-spacing: 0.05em;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-spoiler-caption {
+            display: block;
+        }
+
+        .chatlog__attachment--hidden:hover .chatlog__attachment-spoiler-caption {
+            color: #fff;
+        }
+
+        .chatlog__attachment-media {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-media {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic {
+            width: 100%;
+            max-width: 520px;
+            height: 40px;
+            padding: 10px;
+            background-color: #2f3136;
+            border: 1px solid #292b2f;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+
+        .chatlog__attachment--hidden .chatlog__attachment-generic {
+            filter: blur(44px);
+        }
+
+        .chatlog__attachment-generic-icon {
+            float: left;
+            width: 30px;
+            height: 100%;
+            margin-right: 10px;
+        }
+
+        .chatlog__attachment-generic-size {
+            color: #72767d;
+            font-size: 12px;
+        }
+
+        .chatlog__attachment-generic-name {
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
+        }
+
+        .chatlog__edited-timestamp {
+            color: rgba(255, 255, 255, 0.2);
+        }
+
+        .chatlog__embed {
+            display: flex;
+            margin-top: 0.3em;
+            max-width: 520px;
+        }
+
+        .chatlog__embed-color-pill {
+            flex-shrink: 0;
+            width: 0.25em;
+            border-top-left-radius: 3px;
+            border-bottom-left-radius: 3px;
+        }
+
+        .chatlog__embed-color-pill--default {
+            background-color: #202225;
+        }
+
+        .chatlog__embed-content-container {
+            display: flex;
+            flex-direction: column;
+            padding: 0.5em 0.6em;
+            background-color: rgba(46, 48, 54, 0.3);
+            border: 1px solid rgba(46, 48, 54, 0.6);
+            border-top-right-radius: 3px;
+            border-bottom-right-radius: 3px;
+        }
+
+        .chatlog__embed-content {
+            display: flex;
+            width: 100%;
+        }
+
+        .chatlog__embed-text {
+            flex: 1;
+        }
+
+        .chatlog__embed-author {
+            display: flex;
+            margin-bottom: 0.3em;
+            align-items: center;
+        }
+
+        .chatlog__embed-author-icon {
+            margin-right: 0.5em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+        }
+
+        .chatlog__embed-author-name {
+            font-size: 0.875em;
+            font-weight: 600;
+            direction: ltr;
+            unicode-bidi: bidi-override;
+            color: #ffffff
+        }
+
+        .chatlog__embed-author-name-link {
+            color: #ffffff;
+        }
+
+        .chatlog__embed-title {
+            margin-bottom: 0.2em;
+            font-size: 0.875em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-description {
+            font-weight: 500;
+            font-size: 0.85em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-fields {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0 0.5em;
+        }
+
+        .chatlog__embed-field {
+            flex: 0;
+            min-width: 100%;
+            max-width: 506px;
+            padding-top: 0.6em;
+            font-size: 0.875em;
+        }
+
+        .chatlog__embed-field--inline {
+            flex: 1;
+            flex-basis: auto;
+            min-width: 150px;
+        }
+
+        .chatlog__embed-field-name {
+            margin-bottom: 0.2em;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .chatlog__embed-field-value {
+            font-weight: 500;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-thumbnail {
+            flex: 0;
+            margin-left: 1.2em;
+            max-width: 80px;
+            max-height: 80px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-image-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-image {
+            max-width: 500px;
+            max-height: 400px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-footer {
+            margin-top: 0.6em;
+            color: #dcddde;
+        }
+
+        .chatlog__embed-footer-icon {
+            margin-right: 0.2em;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            vertical-align: middle;
+        }
+
+        .chatlog__embed-footer-text {
+            vertical-align: middle;
+            font-size: 0.75em;
+            font-weight: 500;
+        }
+
+        .chatlog__embed-plainimage {
+            vertical-align: top;
+            max-width: 45vw;
+            max-height: 500px;
+            border-radius: 3px;
+        }
+
+        .chatlog__embed-spotify {
+            border: 0;
+        }
+
+        .chatlog__embed-youtube-container {
+            margin-top: 0.6em;
+        }
+
+        .chatlog__embed-youtube {
+            border: 0;
+            border-radius: 3px;
+        }
+
+        .chatlog__sticker {
+            width: 180px;
+            height: 180px;
+        }
+
+        .chatlog__sticker--media {
+            max-width: 100%;
+            max-height: 100%;
+        }
+
+        .chatlog__reactions {
+            display: flex;
+        }
+
+        .chatlog__reaction {
+            display: flex;
+            align-items: center;
+            margin: 0.35em 0.1em 0.1em 0;
+            padding: .125rem .375rem;
+            background-color: #2f3136;
+            border-radius: 8px;
+            border-color: transparent;
+            border-width: 1px;
+            border-style: solid;
+        }
+
+        .chatlog__reaction:hover {
+            border-color: hsla(0,0%,100%,.2);
+            border-width: 1px;
+            border-style: solid;
+            background-color: transparent;
+        }
+
+        .chatlog__reaction-count {
+            min-width: 9px;
+            margin-left: 0.35em;
+            font-size: 0.875em;
+            color: #b9bbbe;
+        }
+
+        .chatlog__reaction:hover .chatlog__reaction-count {
+            color: #dcddde;
+        }
+
+        .chatlog__bot-tag {
+            position: relative;
+            top: -.1em;
+            margin-left: 0.3em;
+            padding: 0.05em 0.3em;
+            border-radius: 3px;
+            line-height: 1.3;
+            background-color: #5865F2;
+            color: #ffffff;
+            font-size: 0.625em;
+            font-weight: 500;
+        }
+
+        .postamble {
+            margin: 1.4em 0.3em 0.6em 0.3em;
+            padding: 1em;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .postamble__entry {
+            color: #ffffff;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/solarized-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.pre--multiline').forEach(e => hljs.highlightBlock(e));
+        });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lottie-web/5.8.1/lottie.min.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            document.querySelectorAll('.chatlog__sticker--media[data-source]').forEach(e => {
+                const imageDataUrl = e.getAttribute('data-source');
+
+                const anim = lottie.loadAnimation({
+                  container: e,
+                  renderer: 'svg',
+                  loop: true,
+                  autoplay: true,
+                  path: imageDataUrl
+                });
+
+                anim.addEventListener('data_failed', () =>
+                    e.innerHTML = '<strong>[Sticker cannot be rendered]</strong>'
+                );
+            });
+        });
+    </script>
+
+    <script>
+        function scrollToMessage(event, id) {
+            var element = document.getElementById('message-' + id);
+
+            if (element) {
+                event.preventDefault();
+
+                element.classList.add('chatlog__message--highlighted');
+
+                window.scrollTo({
+                    top: element.getBoundingClientRect().top - document.body.getBoundingClientRect().top - (window.innerHeight / 2),
+                    behavior: 'smooth'
+                });
+
+                window.setTimeout(function() {
+                    element.classList.remove('chatlog__message--highlighted');
+                }, 2000);
+            }
+        }
+
+        function showSpoiler(event, element) {
+            if (element && element.classList.contains('spoiler-text--hidden')) {
+                event.preventDefault();
+                element.classList.remove('spoiler-text--hidden');
+            }
+            if (element && element.classList.contains('chatlog__attachment--hidden')) {
+                event.preventDefault();
+                element.classList.remove('chatlog__attachment--hidden');
+            }
+        }
+    </script>
+
+    <svg style="display: none">
+        <symbol id="icon-attachment" viewBox="0 0 720 960">
+            <path fill="#f4f5fb" d="M50,935a25,25,0,0,1-25-25V50A25,25,0,0,1,50,25H519.6L695,201.32V910a25,25,0,0,1-25,25Z" />
+            <path fill="#7789c4" d="M509.21,50,670,211.63V910H50V50H509.21M530,0H50A50,50,0,0,0,0,50V910a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50h0V191Z" />
+            <path fill="#f4f5fb" d="M530,215a25,25,0,0,1-25-25V50a25,25,0,0,1,16.23-23.41L693.41,198.77A25,25,0,0,1,670,215Z" />
+            <path fill="#7789c4" d="M530,70.71,649.29,190H530V70.71M530,0a50,50,0,0,0-50,50V190a50,50,0,0,0,50,50H670a50,50,0,0,0,50-50Z" />
+        </symbol>
+    </svg>
+</head>
+<body>
+
+<div class="preamble">
+    <div class="preamble__guild-icon-container">
+        <img class="preamble__guild-icon" src="mg251%20mafia%20chat%20uic%20archive.html_Files/f40fedbce4abf09eebcfee9477ad2f40-DA660.png" alt="Guild icon" loading="lazy">
+    </div>
+    <div class="preamble__entries-container">
+        <div class="preamble__entry">lol bob central™</div>
+        <div class="preamble__entry">Declassified chats the 3rd / 251-maf-chat</div>
+
+
+    </div>
+</div>
+
+<div class="chatlog">
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-22 04:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032430204366958" id="message-953032430204366958" title="Message sent: 14-Mar-22 04:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">cb connect MafiaChat251</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol"></div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+                <span class="chatlog__reference-name" title="Mathletesv#6308" style="color: rgb(255,50,78)">not rich boy</span>
+                <div class="chatlog__reference-content">
+                    <span class="chatlog__reference-link" onclick="scrollToMessage(event, &#39;953032430204366958&#39;)">
+cb connect MafiaChat251                    </span>
+
+                </div>
+        </div>
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/1c0f9275305b31936ade51b6f67219eb-CE72E.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Connections Bot#2413" data-user-id="652938911642943498" style="color: rgb(65,112,255)">Connections Bot</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-22 04:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032430766419978" id="message-953032430766419978" title="Message sent: 14-Mar-22 04:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Selected <span class="pre pre--inline">MafiaChat251</span> automatically</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953032431441682492" id="message-953032431441682492" title="Message sent: 14-Mar-22 04:50 PM">
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(237,66,69,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace"><img loading="lazy" class="emoji " alt="❌" title="x" src="https://twemoji.maxcdn.com/2/svg/274c.svg"> Invalid channel argument! <img loading="lazy" class="emoji " alt="❌" title="x" src="https://twemoji.maxcdn.com/2/svg/274c.svg"></div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                    <div class="chatlog__embed-footer">
+
+                                        <span class="chatlog__embed-footer-text">
+Could not connect channel: Channel argument was not a channel
+ • 
+14-Mar-22 04:50 PM                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-22 04:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032482075336744" id="message-953032482075336744" title="Message sent: 14-Mar-22 04:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">cb connect <span class="mention">#251-maf-chat</span> MafiaChat251</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/1c0f9275305b31936ade51b6f67219eb-CE72E.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Connections Bot#2413" data-user-id="652938911642943498" style="color: rgb(65,112,255)">Connections Bot</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-22 04:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032485313347604" id="message-953032485313347604" title="Message sent: 14-Mar-22 04:50 PM">
+
+
+                        <div class="chatlog__embed">
+                                <div class="chatlog__embed-color-pill" style="background-color: rgba(87,242,135,255)"></div>
+
+                            <div class="chatlog__embed-content-container">
+                                <div class="chatlog__embed-content">
+                                    <div class="chatlog__embed-text">
+
+
+                                            <div class="chatlog__embed-description">
+                                                <div class="markdown preserve-whitespace">✅ Channel was connected successfully! ✅</div>
+                                            </div>
+
+                                    </div>
+
+                                </div>
+
+
+                                    <div class="chatlog__embed-footer">
+
+                                        <span class="chatlog__embed-footer-text">
+Channel was connected to MafiaChat251
+ • 
+14-Mar-22 04:50 PM                                        </span>
+                                    </div>
+                            </div>
+                        </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/28aa740a0007fa74c78c2d9c67546fad-7B5B7.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Connections Bot#0000" data-user-id="953032484172464159" style="">Connections Bot</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-22 04:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032485321707571" id="message-953032485321707571" title="Message sent: 14-Mar-22 04:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="pre pre--inline">adra simping live 4k™&#39;s #251-maf-chat</span> has joined the connection</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/95f3f01d1a8af0206d78fddc4d556522-54B6C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">s0c00b0#5989 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-22 04:50 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032513532596324" id="message-953032513532596324" title="Message sent: 14-Mar-22 04:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">idk whats the normal mafia chat system</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/439e948d9535ea605b32e955a13c7087-01BB0.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Mathletesv#6308 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-22 04:51 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032641333043230" id="message-953032641333043230" title="Message sent: 14-Mar-22 04:51 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">if you have 2-way every channel that is connected will be the same</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953032697561907221" id="message-953032697561907221" title="Message sent: 14-Mar-22 04:51 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">do you want people in uic to be able to send messages here like mathjay talking to nike</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/95f3f01d1a8af0206d78fddc4d556522-54B6C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">s0c00b0#5989 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-22 04:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032843083251782" id="message-953032843083251782" title="Message sent: 14-Mar-22 04:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">no</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/439e948d9535ea605b32e955a13c7087-01BB0.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Mathletesv#6308 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-22 04:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032858644144218" id="message-953032858644144218" title="Message sent: 14-Mar-22 04:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/95f3f01d1a8af0206d78fddc4d556522-54B6C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">s0c00b0#5989 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-22 04:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032863920574505" id="message-953032863920574505" title="Message sent: 14-Mar-22 04:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">that would be bad</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/439e948d9535ea605b32e955a13c7087-01BB0.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Mathletesv#6308 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">14-Mar-22 04:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032873655558254" id="message-953032873655558254" title="Message sent: 14-Mar-22 04:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">yes</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">14-Mar-22 04:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="953032960985165824" id="message-953032960985165824" title="Message sent: 14-Mar-22 04:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">trest</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953032972800503868" id="message-953032972800503868" title="Message sent: 14-Mar-22 04:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">test*</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953032986822053919" id="message-953032986822053919" title="Message sent: 14-Mar-22 04:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok good doesn&#39;t send</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 04:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="953382741716660374" id="message-953382741716660374" title="Message sent: 15-Mar-22 04:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png">https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-22 04:02 PM</span>
+
+            <div class="chatlog__message " data-message-id="953382771248754779" id="message-953382771248754779" title="Message sent: 15-Mar-22 04:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">WTF THE TIMING</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953382792505475072" id="message-953382792505475072" title="Message sent: 15-Mar-22 04:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I JUST REMOVED SCIPIO 2 SECONDS AGO</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953382810893303919" id="message-953382810893303919" title="Message sent: 15-Mar-22 04:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">BOSS WHY DID YOU NOT CHECK</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c2ba7b4073e696136a34b10157074806-854CA.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989" data-user-id="538086140276768778" style="color: rgb(60,177,103)">SIGH</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-22 04:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="953382849195696158" id="message-953382849195696158" title="Message sent: 15-Mar-22 04:03 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ITS OK I DIDNT ADD ANYTHING IN SPOIL</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-22 04:03 PM</span>
+
+            <div class="chatlog__message " data-message-id="953382961061986354" id="message-953382961061986354" title="Message sent: 15-Mar-22 04:03 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but hannah sent a message</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953383006465327124" id="message-953383006465327124" title="Message sent: 15-Mar-22 04:03 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">that is spoil</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/95f3f01d1a8af0206d78fddc4d556522-54B6C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">s0c00b0#5989 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 04:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="953383114359570502" id="message-953383114359570502" title="Message sent: 15-Mar-22 04:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">its ok everything has been taken care of ™</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 04:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="953383162568900638" id="message-953383162568900638" title="Message sent: 15-Mar-22 04:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Are you sure.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953383199822708796" id="message-953383199822708796" title="Message sent: 15-Mar-22 04:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Anyway.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-22 04:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="953383242344587324" id="message-953383242344587324" title="Message sent: 15-Mar-22 04:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><img loading="lazy" class="emoji emoji--large" alt="kekw" title="kekw" src="https://cdn.discordapp.com/emojis/785610980913709066.png"></span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953383269074882651" id="message-953383269074882651" title="Message sent: 15-Mar-22 04:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">now I can&#39;t talk to hannah :c</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 04:04 PM</span>
+
+            <div class="chatlog__message " data-message-id="953383277446713344" id="message-953383277446713344" title="Message sent: 15-Mar-22 04:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png">https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-22 04:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="953383374364487680" id="message-953383374364487680" title="Message sent: 15-Mar-22 04:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">wait what?</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 04:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="953383456505753670" id="message-953383456505753670" title="Message sent: 15-Mar-22 04:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Imagine having senioritis.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-22 04:05 PM</span>
+
+            <div class="chatlog__message " data-message-id="953383487157731379" id="message-953383487157731379" title="Message sent: 15-Mar-22 04:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok good hannah can&#39;t see</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953383489678499890" id="message-953383489678499890" title="Message sent: 15-Mar-22 04:05 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">kek</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 04:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="953383622268821504" id="message-953383622268821504" title="Message sent: 15-Mar-22 04:06 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">. . . Why. Every time I type it shows up both here and in <span class="mention">#deleted-channel</span>.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-22 04:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="953383901018083338" id="message-953383901018083338" title="Message sent: 15-Mar-22 04:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">boss are you having tech issues</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953383943724478465" id="message-953383943724478465" title="Message sent: 15-Mar-22 04:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><span class="mention" title="s0c00b0#5989">@SIGH</span></span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c2ba7b4073e696136a34b10157074806-854CA.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989" data-user-id="538086140276768778" style="color: rgb(60,177,103)">SIGH</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-22 04:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="953384007121371208" id="message-953384007121371208" title="Message sent: 15-Mar-22 04:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">no im not</span>
+
+                                <span class="chatlog__edited-timestamp" title="15-Mar-22 04:07 PM">(edited)</span>
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953384028252291162" id="message-953384028252291162" title="Message sent: 15-Mar-22 04:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">why</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953384055137779793" id="message-953384055137779793" title="Message sent: 15-Mar-22 04:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">also dont type here</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953384062372950096" id="message-953384062372950096" title="Message sent: 15-Mar-22 04:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">type in spoiled</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/82884227995477cd5aaca3c5837cabca-6424B.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Mathletesv#6308" data-user-id="696690637654720542" style="color: rgb(255,50,78)">not rich boy</span>
+
+
+        <span class="chatlog__timestamp">15-Mar-22 04:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="953384074318331904" id="message-953384074318331904" title="Message sent: 15-Mar-22 04:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/95f3f01d1a8af0206d78fddc4d556522-54B6C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">s0c00b0#5989 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 04:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="953384356880191519" id="message-953384356880191519" title="Message sent: 15-Mar-22 04:09 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">idk its msv&#39;s fault</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 04:10 PM</span>
+
+            <div class="chatlog__message " data-message-id="953384792022478902" id="message-953384792022478902" title="Message sent: 15-Mar-22 04:10 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Sigh.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953384853674541157" id="message-953384853674541157" title="Message sent: 15-Mar-22 04:11 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Also I&#39;m doomed.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953385729139040307" id="message-953385729139040307" title="Message sent: 15-Mar-22 04:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m muting <span class="mention">#deleted-channel</span>, ad. So lmk if you say anything.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 04:22 PM</span>
+
+            <div class="chatlog__message " data-message-id="953387821106855956" id="message-953387821106855956" title="Message sent: 15-Mar-22 04:22 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Make a butterwizard, msv. \o/</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 05:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="953404574243373117" id="message-953404574243373117" title="Message sent: 15-Mar-22 05:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">\o/ This will be ok bc ad is competent. \o/</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 06:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="953423248241078302" id="message-953423248241078302" title="Message sent: 15-Mar-22 06:43 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">tmw being a hypocrite makes me town.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953423261801263184" id="message-953423261801263184" title="Message sent: 15-Mar-22 06:43 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png">https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 07:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="953438345747370055" id="message-953438345747370055" title="Message sent: 15-Mar-22 07:43 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Sigh ig I’m going to have to figure this out by trial and error.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 09:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="953459908655869952" id="message-953459908655869952" title="Message sent: 15-Mar-22 09:09 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">no  i&#39;m not</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 09:26 PM</span>
+
+            <div class="chatlog__message " data-message-id="953464195146465281" id="message-953464195146465281" title="Message sent: 15-Mar-22 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">lol speedrun townreads</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953464248665792522" id="message-953464248665792522" title="Message sent: 15-Mar-22 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">BOB s</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953464262188232746" id="message-953464262188232746" title="Message sent: 15-Mar-22 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">:kekw:</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953464305678966854" id="message-953464305678966854" title="Message sent: 15-Mar-22 09:26 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">huh the double didn&#39;t send</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 09:45 PM</span>
+
+            <div class="chatlog__message " data-message-id="953469048786653185" id="message-953469048786653185" title="Message sent: 15-Mar-22 09:45 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I should figure out how to make more posts</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953469083813286008" id="message-953469083813286008" title="Message sent: 15-Mar-22 09:45 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">not that I&#39;m <em>lurking</em></span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 10:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="953474450790162512" id="message-953474450790162512" title="Message sent: 15-Mar-22 10:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh no night kills</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953474500559769682" id="message-953474500559769682" title="Message sent: 15-Mar-22 10:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">test</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953474521707479070" id="message-953474521707479070" title="Message sent: 15-Mar-22 10:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh :O it worked</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 10:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="953487632514564206" id="message-953487632514564206" title="Message sent: 15-Mar-22 10:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I honestly don&#39;t know how i would approach this game as town</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953488126658088980" id="message-953488126658088980" title="Message sent: 15-Mar-22 11:01 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">actually wait no it&#39;d be townreading mathjay ok</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953488219763265546" id="message-953488219763265546" title="Message sent: 15-Mar-22 11:01 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">eh i got duped in 248 so i might not</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953488357051220049" id="message-953488357051220049" title="Message sent: 15-Mar-22 11:02 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">maybe bob</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953488954005540914" id="message-953488954005540914" title="Message sent: 15-Mar-22 11:04 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i think trying to read falliinq was good except they essentially just 2-posted and dipped so i couldn&#39;t do anything</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">15-Mar-22 11:43 PM</span>
+
+            <div class="chatlog__message " data-message-id="953498606374100992" id="message-953498606374100992" title="Message sent: 15-Mar-22 11:43 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok so like Euler/Scipio relatively easy</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953498800138358804" id="message-953498800138358804" title="Message sent: 15-Mar-22 11:43 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">maybe snow or mathjay</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953498834204508191" id="message-953498834204508191" title="Message sent: 15-Mar-22 11:43 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">potentially avanae</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 12:26 AM</span>
+
+            <div class="chatlog__message " data-message-id="953509614484324372" id="message-953509614484324372" title="Message sent: 16-Mar-22 12:26 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh no i have to form a read on you sometime</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 09:23 AM</span>
+
+            <div class="chatlog__message " data-message-id="953644601837764608" id="message-953644601837764608" title="Message sent: 16-Mar-22 09:23 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ahahaha.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953644629176254494" id="message-953644629176254494" title="Message sent: 16-Mar-22 09:23 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I just remembered you were only scum in 233.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953644634897256528" id="message-953644634897256528" title="Message sent: 16-Mar-22 09:23 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">It&#39;s ok.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953644835582124062" id="message-953644835582124062" title="Message sent: 16-Mar-22 09:24 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Just wallpost or smthing.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953644853462454322" id="message-953644853462454322" title="Message sent: 16-Mar-22 09:24 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Well not wallpost.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953644869774102558" id="message-953644869774102558" title="Message sent: 16-Mar-22 09:24 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Bad idea.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953644882931621948" id="message-953644882931621948" title="Message sent: 16-Mar-22 09:24 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">But make analyses.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953645437074673674" id="message-953645437074673674" title="Message sent: 16-Mar-22 09:26 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Ok yeah this is a mistake.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953645478556364810" id="message-953645478556364810" title="Message sent: 16-Mar-22 09:26 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m typically not on in the evenings.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953645515923394560" id="message-953645515923394560" title="Message sent: 16-Mar-22 09:26 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/emojis/776250503851016224.webp?size=128&amp;quality=lossless">https://cdn.discordapp.com/emojis/776250503851016224.webp?size=128&amp;quality=lossless</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/776250503851016224-49474.webp">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/776250503851016224-49474.webp" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 09:35 AM</span>
+
+            <div class="chatlog__message " data-message-id="953647677080494080" id="message-953647677080494080" title="Message sent: 16-Mar-22 09:35 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I haven&#39;t even been in a town game with any of these except Bob in ages.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953647701101256734" id="message-953647701101256734" title="Message sent: 16-Mar-22 09:35 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">idk how I&#39;d read them.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953647705589186610" id="message-953647705589186610" title="Message sent: 16-Mar-22 09:35 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">\o/</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953649286778875984" id="message-953649286778875984" title="Message sent: 16-Mar-22 09:41 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I feel like this mindset is bad, but that makes two of us.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953649442119110666" id="message-953649442119110666" title="Message sent: 16-Mar-22 09:42 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Are we just on at opposing times.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953649465103896646" id="message-953649465103896646" title="Message sent: 16-Mar-22 09:42 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">/o\</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 10:52 AM</span>
+
+            <div class="chatlog__message " data-message-id="953667083969888376" id="message-953667083969888376" title="Message sent: 16-Mar-22 10:52 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m sorry but reading these posts is taking forever.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953667121567645716" id="message-953667121567645716" title="Message sent: 16-Mar-22 10:52 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">+ multitasking.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 11:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="953671087856680970" id="message-953671087856680970" title="Message sent: 16-Mar-22 11:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I really did spend an hour half reading the thread.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953672839389655070" id="message-953672839389655070" title="Message sent: 16-Mar-22 11:15 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oh yeah oops.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953672892271456306" id="message-953672892271456306" title="Message sent: 16-Mar-22 11:15 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I just realized I did this to my scumpartners in 247 as well.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 11:23 AM</span>
+
+            <div class="chatlog__message " data-message-id="953674787610312804" id="message-953674787610312804" title="Message sent: 16-Mar-22 11:23 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I have objections to reasoning but apparently I&#39;m tr-ing falliin.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="953674856594026547" id="message-953674856594026547" title="Message sent: 16-Mar-22 11:23 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yeah I&#39;ll just leave this.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 12:40 PM</span>
+
+            <div class="chatlog__message " data-message-id="953694237239697418" id="message-953694237239697418" title="Message sent: 16-Mar-22 12:40 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">btw just saving this for later <a href="https://artofproblemsolving.com/community/c49h2802438p24696465">https://artofproblemsolving.com/community/c49h2802438p24696465</a></span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 12:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="953698433959608360" id="message-953698433959608360" title="Message sent: 16-Mar-22 12:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">&gt;.&gt;</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 01:28 PM</span>
+
+            <div class="chatlog__message " data-message-id="953706346820292619" id="message-953706346820292619" title="Message sent: 16-Mar-22 01:28 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Yeah I have no idea how any of these ppl usually play except maybe idk.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">16-Mar-22 04:09 PM</span>
+
+            <div class="chatlog__message " data-message-id="953746792015618078" id="message-953746792015618078" title="Message sent: 16-Mar-22 04:09 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I forgot my reads, and they are probably all over the place.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Mar-22 11:54 AM</span>
+
+            <div class="chatlog__message " data-message-id="954045009051672636" id="message-954045009051672636" title="Message sent: 17-Mar-22 11:54 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Bob and his monologues.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954045031747031060" id="message-954045031747031060" title="Message sent: 17-Mar-22 11:54 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/703722648055709777/927357507016462406/thonk.png">https://cdn.discordapp.com/attachments/703722648055709777/927357507016462406/thonk.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/thonk-E29D8.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/thonk-E29D8.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954045671214833685" id="message-954045671214833685" title="Message sent: 17-Mar-22 11:56 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/703722648055709777/927357507016462406/thonk.png">https://cdn.discordapp.com/attachments/703722648055709777/927357507016462406/thonk.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/thonk-E29D8.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/thonk-E29D8.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954045675744677940" id="message-954045675744677940" title="Message sent: 17-Mar-22 11:56 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/953026538289385512/954045674779975680/unknown.png">https://cdn.discordapp.com/attachments/953026538289385512/954045674779975680/unknown.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/unknown-0D747.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/unknown-0D747.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Mar-22 12:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="954059874243854368" id="message-954059874243854368" title="Message sent: 17-Mar-22 12:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Also ad are you usually like this as town d1?</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Mar-22 12:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="954060216436158564" id="message-954060216436158564" title="Message sent: 17-Mar-22 12:54 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">uh... probably not usually but in this PL probably</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Mar-22 12:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="954060271792566312" id="message-954060271792566312" title="Message sent: 17-Mar-22 12:54 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/703722648055709777/927357507016462406/thonk.png">https://cdn.discordapp.com/attachments/703722648055709777/927357507016462406/thonk.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/thonk-E29D8.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/thonk-E29D8.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954060275957514340" id="message-954060275957514340" title="Message sent: 17-Mar-22 12:54 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I see.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954060326528229406" id="message-954060326528229406" title="Message sent: 17-Mar-22 12:55 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">It&#39;s working at least.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954060423748005918" id="message-954060423748005918" title="Message sent: 17-Mar-22 12:55 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Don&#39;t be complacent, though, whatever that looks like. /o\</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954060440051269642" id="message-954060440051269642" title="Message sent: 17-Mar-22 12:55 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Also do we have a plan or no.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Mar-22 12:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="954060961948504074" id="message-954060961948504074" title="Message sent: 17-Mar-22 12:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">idts</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Mar-22 05:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="954125171600552036" id="message-954125171600552036" title="Message sent: 17-Mar-22 05:12 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">\o/</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954125184745496586" id="message-954125184745496586" title="Message sent: 17-Mar-22 05:12 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I did it.
+<a href="https://cdn.discordapp.com/attachments/953026538289385512/954125183478824961/unknown.png">https://cdn.discordapp.com/attachments/953026538289385512/954125183478824961/unknown.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/unknown-BED98.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/unknown-BED98.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954125289246588948" id="message-954125289246588948" title="Message sent: 17-Mar-22 05:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">\o/</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954125496713613312" id="message-954125496713613312" title="Message sent: 17-Mar-22 05:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I am no longer terrible at scum.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954125501532885002" id="message-954125501532885002" title="Message sent: 17-Mar-22 05:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Just bad.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954125516099682344" id="message-954125516099682344" title="Message sent: 17-Mar-22 05:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/643581587836895262/846153274155466762/cloverwizard.png">https://cdn.discordapp.com/attachments/643581587836895262/846153274155466762/cloverwizard.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/cloverwizard-CBE79.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/cloverwizard-CBE79.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Mar-22 06:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="954144446155485194" id="message-954144446155485194" title="Message sent: 17-Mar-22 06:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">110% unrealistic, but we should try to keep up the streak of sweeping.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">17-Mar-22 07:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="954159482865324103" id="message-954159482865324103" title="Message sent: 17-Mar-22 07:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">\o/ exciting</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">18-Mar-22 09:06 PM</span>
+
+            <div class="chatlog__message " data-message-id="954546456453341204" id="message-954546456453341204" title="Message sent: 18-Mar-22 09:06 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh no is falliinq good at reading me</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">18-Mar-22 10:44 PM</span>
+
+            <div class="chatlog__message " data-message-id="954570950865731617" id="message-954570950865731617" title="Message sent: 18-Mar-22 10:44 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m just waiting for this all to break</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954570975406620692" id="message-954570975406620692" title="Message sent: 18-Mar-22 10:44 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">last minute CFD or smth</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954571372863037470" id="message-954571372863037470" title="Message sent: 18-Mar-22 10:45 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">fsr I&#39;m thinking kill avanae</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954572528012128256" id="message-954572528012128256" title="Message sent: 18-Mar-22 10:50 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but idrk</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954573222475616337" id="message-954573222475616337" title="Message sent: 18-Mar-22 10:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">3 mishangs :sigh:</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 12:04 AM</span>
+
+            <div class="chatlog__message " data-message-id="954591202609594458" id="message-954591202609594458" title="Message sent: 19-Mar-22 12:04 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh no</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954591226261299290" id="message-954591226261299290" title="Message sent: 19-Mar-22 12:04 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">this will probably not end well</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954591248583381023" id="message-954591248583381023" title="Message sent: 19-Mar-22 12:04 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">people are being compotent</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 08:53 AM</span>
+
+            <div class="chatlog__message " data-message-id="954724287997173830" id="message-954724287997173830" title="Message sent: 19-Mar-22 08:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">But also ad you are doing v little.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954724315457265694" id="message-954724315457265694" title="Message sent: 19-Mar-22 08:53 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Why kill avanae.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 09:41 AM</span>
+
+            <div class="chatlog__message " data-message-id="954736443916435528" id="message-954736443916435528" title="Message sent: 19-Mar-22 09:41 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">/o\</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954736458370015322" id="message-954736458370015322" title="Message sent: 19-Mar-22 09:41 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ofc I cld have just left.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954736475268841502" id="message-954736475268841502" title="Message sent: 19-Mar-22 09:41 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but I didn&#39;t.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954736496693366874" id="message-954736496693366874" title="Message sent: 19-Mar-22 09:41 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">So oops.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954736981387124766" id="message-954736981387124766" title="Message sent: 19-Mar-22 09:43 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">But also I have to go bye.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954736988576153680" id="message-954736988576153680" title="Message sent: 19-Mar-22 09:43 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png">https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 09:44 AM</span>
+
+            <div class="chatlog__message " data-message-id="954737037758595142" id="message-954737037758595142" title="Message sent: 19-Mar-22 09:44 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">bye</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 10:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="954741583964684318" id="message-954741583964684318" title="Message sent: 19-Mar-22 10:02 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh rip</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 10:07 AM</span>
+
+            <div class="chatlog__message " data-message-id="954742912808271902" id="message-954742912808271902" title="Message sent: 19-Mar-22 10:07 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png">https://cdn.discordapp.com/attachments/643581587836895262/846155858785599519/notlikecat.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/notlikecat-82370.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954743036770910268" id="message-954743036770910268" title="Message sent: 19-Mar-22 10:07 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Sorry.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954743058228973629" id="message-954743058228973629" title="Message sent: 19-Mar-22 10:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Trial and error rip.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/95f3f01d1a8af0206d78fddc4d556522-54B6C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">s0c00b0#5989 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 10:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="954743110905262161" id="message-954743110905262161" title="Message sent: 19-Mar-22 10:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">;-; hannah do u want spec</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 10:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="954743132082307152" id="message-954743132082307152" title="Message sent: 19-Mar-22 10:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Sure.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954743154387607593" id="message-954743154387607593" title="Message sent: 19-Mar-22 10:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Oops.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954743159072628858" id="message-954743159072628858" title="Message sent: 19-Mar-22 10:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Bye.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 10:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="954743251888402462" id="message-954743251888402462" title="Message sent: 19-Mar-22 10:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh wait this is going to be another town sweep <img loading="lazy" class="emoji " alt="😟" title="worried" src="https://twemoji.maxcdn.com/2/svg/1f61f.svg"></span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954743630986350632" id="message-954743630986350632" title="Message sent: 19-Mar-22 10:10 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">if i survive d2 I&#39;m considering this a win</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954743648103301260" id="message-954743648103301260" title="Message sent: 19-Mar-22 10:10 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">actually no</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954743662447853598" id="message-954743662447853598" title="Message sent: 19-Mar-22 10:10 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954743733490970666" id="message-954743733490970666" title="Message sent: 19-Mar-22 10:10 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">like still it won&#39;t be a sweep</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/c1b246411c6a1f7148894e20c1271304-B44FE.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="a_tps_person#0298 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">a_tps_person#0298 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 10:11 AM</span>
+
+            <div class="chatlog__message " data-message-id="954743817217654804" id="message-954743817217654804" title="Message sent: 19-Mar-22 10:11 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><a href="https://cdn.discordapp.com/attachments/643581587836895262/846153274155466762/cloverwizard.png">https://cdn.discordapp.com/attachments/643581587836895262/846153274155466762/cloverwizard.png</a></span>
+
+                        </div>
+                    </div>
+
+
+                        <div class="chatlog__embed">
+                            <a href="mg251%20mafia%20chat%20uic%20archive.html_Files/cloverwizard-CBE79.png">
+                                <img class="chatlog__embed-plainimage" src="mg251%20mafia%20chat%20uic%20archive.html_Files/cloverwizard-CBE79.png" alt="Embedded image" loading="lazy">
+                            </a>
+                        </div>
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954743838407266424" id="message-954743838407266424" title="Message sent: 19-Mar-22 10:11 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Have a parting cloverwizard.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 10:12 AM</span>
+
+            <div class="chatlog__message " data-message-id="954744267199377499" id="message-954744267199377499" title="Message sent: 19-Mar-22 10:12 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">thanks</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 11:29 AM</span>
+
+            <div class="chatlog__message " data-message-id="954763454567284756" id="message-954763454567284756" title="Message sent: 19-Mar-22 11:29 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">what if i kill scipio</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954763833174556752" id="message-954763833174556752" title="Message sent: 19-Mar-22 11:30 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i could kill bob and more or less kill the game</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954763893786443776" id="message-954763893786443776" title="Message sent: 19-Mar-22 11:30 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">although i can probably pocket them</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954764433018732544" id="message-954764433018732544" title="Message sent: 19-Mar-22 11:32 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok i should kill Euler/Scipio/Bob/snow
+probably can convince snow 
+I&#39;ll want to kill Scipio eventually b/c 246</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954764480150134816" id="message-954764480150134816" title="Message sent: 19-Mar-22 11:33 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>Kill: Scipio1</strong> for now</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954765131131256853" id="message-954765131131256853" title="Message sent: 19-Mar-22 11:35 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">probably too obvious</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 07:29 PM</span>
+
+            <div class="chatlog__message " data-message-id="954884306667466816" id="message-954884306667466816" title="Message sent: 19-Mar-22 07:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh I have to write the post :blobcatcry:</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 07:42 PM</span>
+
+            <div class="chatlog__message " data-message-id="954887656117002360" id="message-954887656117002360" title="Message sent: 19-Mar-22 07:42 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">this is going to come off as way too obvious</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">19-Mar-22 07:49 PM</span>
+
+            <div class="chatlog__message " data-message-id="954889468970684426" id="message-954889468970684426" title="Message sent: 19-Mar-22 07:49 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">actually waht if i don&#39;t kill scipio</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954890086258999296" id="message-954890086258999296" title="Message sent: 19-Mar-22 07:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok good news I didn&#39;t have anything to say because scipio didn&#39;t actually make any posts that were like anything</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="954890324940042341" id="message-954890324940042341" title="Message sent: 19-Mar-22 07:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh no nested quotes</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">20-Mar-22 04:53 PM</span>
+
+            <div class="chatlog__message " data-message-id="955207410673414174" id="message-955207410673414174" title="Message sent: 20-Mar-22 04:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I actually didn&#39;t see the flip</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955207458836586597" id="message-955207458836586597" title="Message sent: 20-Mar-22 04:53 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">wha- connections bot is being weird</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955208578111766578" id="message-955208578111766578" title="Message sent: 20-Mar-22 04:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oof i might lose in 3p lylo
+obv keep avanae alive</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955208811411558492" id="message-955208811411558492" title="Message sent: 20-Mar-22 04:58 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">probably keep snow/osmium to 3p? so kill bob/euler
+bob first</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">20-Mar-22 09:54 PM</span>
+
+            <div class="chatlog__message " data-message-id="955283284894564402" id="message-955283284894564402" title="Message sent: 20-Mar-22 09:54 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">OMG Bob</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955283712340271124" id="message-955283712340271124" title="Message sent: 20-Mar-22 09:56 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m just going to make the worst night kills and claim &quot;if i were scum why wouldn&#39;t I make better nightkills&quot;</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955284496092131410" id="message-955284496092131410" title="Message sent: 20-Mar-22 09:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">what if
+I kill avanae
+XD</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955284554506203136" id="message-955284554506203136" title="Message sent: 20-Mar-22 09:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">that&#39;s like objectively the worst idea</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955284745099554867" id="message-955284745099554867" title="Message sent: 20-Mar-22 10:00 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">killing bob is <em>probably</em> a bad idea too</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955284885344514099" id="message-955284885344514099" title="Message sent: 20-Mar-22 10:01 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh no i&#39;ll have to kill osmium sometime</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">20-Mar-22 10:13 PM</span>
+
+            <div class="chatlog__message " data-message-id="955287908842090536" id="message-955287908842090536" title="Message sent: 20-Mar-22 10:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">or i could just kill euler idk</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955287957147877376" id="message-955287957147877376" title="Message sent: 20-Mar-22 10:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">who do i want in 3p lylo of {bob,osmium,falliinq, euler}</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955288002328936531" id="message-955288002328936531" title="Message sent: 20-Mar-22 10:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">so I&#39;d need someone to attack.</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955288024827179019" id="message-955288024827179019" title="Message sent: 20-Mar-22 10:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">or for the other one to attack</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955288061300854804" id="message-955288061300854804" title="Message sent: 20-Mar-22 10:13 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">that&#39;d never be bob</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955288919333806150" id="message-955288919333806150" title="Message sent: 20-Mar-22 10:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">YES YES YES THIS GAME IS A MEME</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955289665387237457" id="message-955289665387237457" title="Message sent: 20-Mar-22 10:20 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">how to win as wolf
+step 1) Bob and mathjay town</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955289684580368427" id="message-955289684580368427" title="Message sent: 20-Mar-22 10:20 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Step 2) Profit</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955290695848067092" id="message-955290695848067092" title="Message sent: 20-Mar-22 10:24 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh hi boss</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955290984424546344" id="message-955290984424546344" title="Message sent: 20-Mar-22 10:25 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok probably don&#39;t kill bob then</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955291425925386250" id="message-955291425925386250" title="Message sent: 20-Mar-22 10:27 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">Don&#39;t kill: Avanae, Bob
+Probably not a good kill: falliinq, Osmium
+so... euler? idk</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955292007000055818" id="message-955292007000055818" title="Message sent: 20-Mar-22 10:29 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">bob not understandin what &quot;do not post&quot; means</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955292256259166240" id="message-955292256259166240" title="Message sent: 20-Mar-22 10:30 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">kind of want to kill bob though</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955292529660661780" id="message-955292529660661780" title="Message sent: 20-Mar-22 10:31 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">so kill avanae tomorrow</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955292548405030912" id="message-955292548405030912" title="Message sent: 20-Mar-22 10:31 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">and then who</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955292753749737492" id="message-955292753749737492" title="Message sent: 20-Mar-22 10:32 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">so i push falliinq in F-3 w/ osmium</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955292903633199125" id="message-955292903633199125" title="Message sent: 20-Mar-22 10:32 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">ok but what kill would falliinq make
+i mean probably people who townread me</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955293003382145034" id="message-955293003382145034" title="Message sent: 20-Mar-22 10:33 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I like actually haven&#39;t been available today :/</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955293335113855066" id="message-955293335113855066" title="Message sent: 20-Mar-22 10:34 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">who would falliinq want in F-3? me, them, and ... Bob? or maybe osmium</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955294198330970192" id="message-955294198330970192" title="Message sent: 20-Mar-22 10:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>Kill: BobDBuilder321</strong> for now</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955294260079513672" id="message-955294260079513672" title="Message sent: 20-Mar-22 10:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">think that makes sense w/rt like if anybody else was scum</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955294305528991744" id="message-955294305528991744" title="Message sent: 20-Mar-22 10:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>maybe</em> kill falliinq/Euler</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955294372063215626" id="message-955294372063215626" title="Message sent: 20-Mar-22 10:38 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">*maybe Euler</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955294497712009216" id="message-955294497712009216" title="Message sent: 20-Mar-22 10:39 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh no i have to submit mathpath QT</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955294542096138271" id="message-955294542096138271" title="Message sent: 20-Mar-22 10:39 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">phone scan is probably not a good idea</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">21-Mar-22 12:02 AM</span>
+
+            <div class="chatlog__message " data-message-id="955315536915484703" id="message-955315536915484703" title="Message sent: 21-Mar-22 12:02 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">i mean if I kill falliinq what do I push euler or just let it happen</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">21-Mar-22 09:17 PM</span>
+
+            <div class="chatlog__message " data-message-id="955636327263637524" id="message-955636327263637524" title="Message sent: 21-Mar-22 09:17 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">killing bob is a bad idea because bob xD
+although I mean avanae will probably be townier</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955636538060980255" id="message-955636538060980255" title="Message sent: 21-Mar-22 09:18 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">probably Euler?</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Mar-22 09:56 AM</span>
+
+            <div class="chatlog__message " data-message-id="955827274421252157" id="message-955827274421252157" title="Message sent: 22-Mar-22 09:56 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">oh i forgot to change it oh well</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955827451538313256" id="message-955827451538313256" title="Message sent: 22-Mar-22 09:57 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">whhat if i just quickhammr XD</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955827666160865280" id="message-955827666160865280" title="Message sent: 22-Mar-22 09:57 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">maybe i kill osmium?</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955827900517597204" id="message-955827900517597204" title="Message sent: 22-Mar-22 09:58 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I mean idt euler would kill me ... ever</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955827938308284476" id="message-955827938308284476" title="Message sent: 22-Mar-22 09:58 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">but would he hang falliinq</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Mar-22 06:59 PM</span>
+
+            <div class="chatlog__message " data-message-id="955964064184557612" id="message-955964064184557612" title="Message sent: 22-Mar-22 06:59 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">sorry boss</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955964322163617802" id="message-955964322163617802" title="Message sent: 22-Mar-22 07:00 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I think i&#39;d kill falliinq here?</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/95f3f01d1a8af0206d78fddc4d556522-54B6C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">s0c00b0#5989 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Mar-22 07:07 PM</span>
+
+            <div class="chatlog__message " data-message-id="955966039328444426" id="message-955966039328444426" title="Message sent: 22-Mar-22 07:07 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><em>sigh</em></span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955966144588693514" id="message-955966144588693514" title="Message sent: 22-Mar-22 07:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">if u request quicknight</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955966178260557884" id="message-955966178260557884" title="Message sent: 22-Mar-22 07:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">n3 can end earlier</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955966237450571817" id="message-955966237450571817" title="Message sent: 22-Mar-22 07:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">no one else has night actions so their opinions dont matter xd</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Mar-22 07:08 PM</span>
+
+            <div class="chatlog__message " data-message-id="955966244161466368" id="message-955966244161466368" title="Message sent: 22-Mar-22 07:08 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">I&#39;m really sorry i did it for towncred 
+smth smth as town i would assume avanae is scum and hence euler&#39;s logic of &quot;boss can just work on flavor&quot; would make sense</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="955967031021285466" id="message-955967031021285466" title="Message sent: 22-Mar-22 07:11 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">When would night end w/ quicknight?</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/95f3f01d1a8af0206d78fddc4d556522-54B6C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="s0c00b0#5989 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">s0c00b0#5989 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Mar-22 07:12 PM</span>
+
+            <div class="chatlog__message " data-message-id="955967121140113438" id="message-955967121140113438" title="Message sent: 22-Mar-22 07:12 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">as soon as 1. you request it and 2. i have time to start the day and write flip and whatnot</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">22-Mar-22 10:52 PM</span>
+
+            <div class="chatlog__message " data-message-id="956022550608089118" id="message-956022550608089118" title="Message sent: 22-Mar-22 10:52 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">beh osmium</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+            <div class="chatlog__message " data-message-id="956023743401033778" id="message-956023743401033778" title="Message sent: 22-Mar-22 10:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>Kill: falliinqsnow-</strong> ig</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">23-Mar-22 09:08 AM</span>
+
+            <div class="chatlog__message " data-message-id="956177654158077982" id="message-956177654158077982" title="Message sent: 23-Mar-22 09:08 AM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace"><strong>Request Quicknight</strong></span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" data-user-id="953032484172464159" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+
+            <span class="chatlog__bot-tag">BOT</span>
+
+        <span class="chatlog__timestamp">23-Mar-22 09:14 PM</span>
+
+            <div class="chatlog__message " data-message-id="956360361148305438" id="message-956360361148305438" title="Message sent: 23-Mar-22 09:14 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">aaaah euler</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+        <div class="chatlog__reference-symbol"></div>
+        <div class="chatlog__reference">
+                <img class="chatlog__reference-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/5eedb039bb9b8f5d09ae168a1f75fa96-3F46C.png" alt="Avatar" loading="lazy">
+                <span class="chatlog__reference-name" title="Nope#0907 from Mafia Game 251 Mafia Chat#0000" style="">Nope#0907 from Mafia Game 251 Mafia Chat</span>
+                <div class="chatlog__reference-content">
+                    <span class="chatlog__reference-link" onclick="scrollToMessage(event, &#39;955289665387237457&#39;)">
+how to win as wolf
+step 1) Bob and mathjay town                    </span>
+
+                </div>
+        </div>
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/0-EB806.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="Lokalexabender#2445" data-user-id="534469680409346073" style="color: rgb(62,180,137)">AIDS IS BAD FOR YOU</span>
+
+
+        <span class="chatlog__timestamp">23-Mar-22 09:57 PM</span>
+
+            <div class="chatlog__message " data-message-id="956371105424244766" id="message-956371105424244766" title="Message sent: 23-Mar-22 09:57 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">no chill goddamn</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+
+<div class="chatlog__message-group">
+
+    <div class="chatlog__author-avatar-container">
+        <img class="chatlog__author-avatar" src="mg251%20mafia%20chat%20uic%20archive.html_Files/a341ae3884905a2fb07eab56b33f30c3-F4F17.png" alt="Avatar" loading="lazy">
+    </div>
+
+    <div class="chatlog__messages">
+        <span class="chatlog__author-name" title="gowou#5081" data-user-id="390310776839340044" style="color: rgb(255,50,78)">민트초코계란김치볶음밥</span>
+
+
+        <span class="chatlog__timestamp">23-Mar-22 10:23 PM</span>
+
+            <div class="chatlog__message " data-message-id="956377643027161149" id="message-956377643027161149" title="Message sent: 23-Mar-22 10:23 PM">
+                    <div class="chatlog__content">
+                        <div class="markdown">
+                            <span class="preserve-whitespace">tru tho</span>
+
+                        </div>
+                    </div>
+
+
+
+
+            </div>
+    </div>
+</div>
+
+
+</div>
+
+<div class="postamble">
+    <div class="postamble__entry">Exported 219 message(s)</div>
+</div>
+
+</body>
+
+</html>
