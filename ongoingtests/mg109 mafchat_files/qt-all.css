@@ -230,7 +230,6 @@ min-width: 540px;
 height:3px;
 margin-left:10%;
 margin-right:10%;
-	margin-top:10%;
 }
 
 #div-footer {
@@ -252,6 +251,7 @@ min-width: 506px;
 #div-footer-custom {
 font-size: 0.8em;
 color: #808080;
+height:80%;
 }
 
 #div-footer-logo {
