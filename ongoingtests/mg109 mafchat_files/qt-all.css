@@ -61,7 +61,7 @@ img {
 
 #div-page-top-content {
     /* Must be footer's height */
-    padding-bottom: 226px;
+    padding-bottom: 170px;
 }
 
 #div-page-top-content-custom {
@@ -82,10 +82,10 @@ img {
 
 #div-page-bottom {
 background-color:#e3e4e5;
-margin-top:-226px;
+margin-top:-170px;
 position: relative;
 width: 100%;
-height: 226px;
+height: 170px;
 }
 
 #div-page-bottom-custom {
