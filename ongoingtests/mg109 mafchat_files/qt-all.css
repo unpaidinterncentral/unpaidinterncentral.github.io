@@ -3,7 +3,7 @@ html, body {
 font-family: Arial, Helvitica, sans-serif;
 margin: 0;
 padding: 0;
-   width: 100%;
+height: 100%;
 }
 
 p {
@@ -61,7 +61,7 @@ img {
 
 #div-page-top-content {
     /* Must be footer's height */
-    padding-bottom: 20px;
+    padding-bottom: 226px;
 }
 
 #div-page-top-content-custom {
@@ -82,10 +82,10 @@ img {
 
 #div-page-bottom {
 background-color:#e3e4e5;
-margin-top: -100px;
+margin-top:-226px;
 position: relative;
 width: 100%;
-height: 100px;
+height: 226px;
 }
 
 #div-page-bottom-custom {
@@ -96,7 +96,7 @@ padding-left:0px;
 padding-right:0px;
 background-color: #EBEBEB;
 position: relative;
-width: 700%;
+width: 100%;
 height: 1.5em; /* div-page-top-custom height must match */
 }
 
@@ -237,21 +237,21 @@ border-top: 1px solid #FFFFFF;
 background-color: #F0F0F0;
 margin-left:10%;
 margin-right:10%;
-padding-top:12px;
+padding-top:24px;
 padding-left: 17px;
 padding-right: 17px;
-padding-bottom: 20px;
+padding-bottom: 48px;
 font-size: 0.8em;
 color: #808080;
-height:70%;
+height:150px;
 /*min-width: 644px;*/
 min-width: 506px;
 }
 
 #div-footer-custom {
+padding: 0 10%;
 font-size: 0.8em;
 color: #808080;
-height:80%;
 }
 
 #div-footer-logo {
@@ -270,10 +270,11 @@ margin-top:3px;
 }
 
 #div-footer-text {
-float:right;
+float:left;
 display:inline-block;
 vertical-align:top;
-margin-top:15px;
+margin-top:3px;
+margin-left:1em;
 font-size:0.85em;
 line-height:1.45em;
 }
