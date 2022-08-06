@@ -336,6 +336,7 @@ a.topic-navbutton-custom:hover,
     /*float: left;*/
     border-collapse: collapse;
     width: 100%;
+	height: 100%;
 }
 
 #topic-allmessagesandsidebarcontainer table
@@ -365,6 +366,7 @@ a.topic-navbutton-custom:hover,
 #topic-deletemessagestable {
 	border-collapse: collapse;
 	width: 100%;
+	height: 100%;
 	color: WindowText;
 }
 
