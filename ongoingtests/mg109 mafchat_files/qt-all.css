@@ -243,7 +243,7 @@ padding-right: 17px;
 padding-bottom: 20px;
 font-size: 0.8em;
 color: #808080;
-height:80px;
+height:20px;
 /*min-width: 644px;*/
 min-width: 506px;
 }
@@ -270,11 +270,10 @@ margin-top:3px;
 }
 
 #div-footer-text {
-float:left;
+float:right;
 display:inline-block;
 vertical-align:top;
 margin-top:3px;
-margin-left:1em;
 font-size:0.85em;
 line-height:1.45em;
 }
