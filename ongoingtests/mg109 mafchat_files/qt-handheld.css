@@ -218,19 +218,12 @@ a.topic-navbutton:hover,
 
 .topic-messageauthorcontainer
 {
-    border-top-width: 2px;
-    padding-left: 0.1em;
-    padding-top: 0.1em;
-    padding-bottom: 0.1em;
+display:none;
 }
 
 .topic-messageauthorcontainer-deleted
 {
-    border-top-width: 2px;
-    border-bottom-width: 1px;
-    padding-left: 0.5em;
-    padding-top: 0em;
-    padding-bottom: 0em;
+display:none;
 }
 
 .topic-messagebody
