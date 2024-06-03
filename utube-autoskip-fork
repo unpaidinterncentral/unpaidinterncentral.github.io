@@ -3,8 +3,8 @@ function checkForAds() {
   let video = document.getElementsByClassName("video-stream html5-main-video")[0];
 
   if (adExist && video) {
-    video.playbackRate = 15;
-    audio.volume = 0;
+    video.playbackRate = 9.5;
+    obj.volume = 0;
   }
 
   let skipButton = document.getElementsByClassName("ytp-ad-skip-button-modern ytp-button")[0]
