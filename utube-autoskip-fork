@@ -4,7 +4,7 @@ function checkForAds() {
 
   if (adExist && video) {
     video.playbackRate = 20;
-    video.volume = 0;
+    audio.volume = 0;
   }
 
   let skipButton = document.getElementsByClassName("ytp-ad-skip-button-modern ytp-button")[0]
