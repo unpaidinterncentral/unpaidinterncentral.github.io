@@ -3,7 +3,7 @@ function checkForAds() {
   let video = document.getElementsByClassName("video-stream html5-main-video")[0];
 
   if (adExist && video) {
-    video.playbackRate = 20;
+    video.playbackRate = 15;
     audio.volume = 0;
   }
 
